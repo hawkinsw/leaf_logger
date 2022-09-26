@@ -1,0 +1,37 @@
+README
+
+Building:
+
+If you have the GCC plugin developer tools available, you should be
+able to build by simply running 
+
+$ make
+
+To get the GCC plugin developer tools on Ubuntu, load the following
+packages using apt:
+
+apt-get install gcc-x.y-plugin-dev
+
+where x.y corresponds to the version of GCC installed on your computer.
+
+Testing:
+
+$ make test
+
+should result in a test.out and an a.out file if everything built.
+
+Running:
+
+When compiling with gcc, use these extra command line flags to use the
+plugin:
+
+$ gcc test.c -o a.out -fplugin=<path to bb_stats.so>/bb_stats.so 
+
+You can use an optional second parameter to name the output file:
+
+$ gcc test.c -o a.out -fplugin=<path to bb_stats.so>/bb_stats.so -fplugin-arg-bb_stats-output=<output file>
+
+If you do not specify the output file, the result will be stored in a file automatically. That output file will be named the same as the main input file with the addition of a .bb extension. If the input file contains a path (and /s), those delimiters will be replaced with _s.
+
+That should be it!
+
